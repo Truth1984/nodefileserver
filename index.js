@@ -1,7 +1,6 @@
 var express = require("express");
 var config = require("./config");
 var readdir = require("recursive-readdir");
-var fs = require("fs");
 var app = express();
 
 app.use(express.static(config.root));
