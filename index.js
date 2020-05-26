@@ -7,7 +7,12 @@ app.use(express.static(config.root));
 
 app.all("/", (req, res, next) => {
   readdir(config.root, config.ignore)
-    .then((data) => res.send(data.map((item) => item.replace(config.root, ""))))
+    .then((data) => {
+      if (config.relativeDir) data = data.map((item) => item.replace(config.root, ""));
+      for (let i of config.filter) data = data.filter((item) => new RegExp(i).test(item));
+      if (config.sort) data = data.sort();
+      res.send(data);
+    })
     .then(() => next());
 });
 
