@@ -18,6 +18,6 @@
   "homepage": "https://github.com/Truth1984/nodefileserver#readme",
   "dependencies": {
     "express": "^4.17.1",
-    "recursive-readdir": "^2.2.2"
+    "minimatch": "^3.0.4"
   }
 }
