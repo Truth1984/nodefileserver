@@ -11,7 +11,7 @@ for (let i in config.root) config.root[i] = config.root[i].replace("~", process.
 // static serve
 for (let i of config.root) app.use(express.static(i));
 // sorted dir
-config._sortedDir = config.root.sort((a, b) => b.length - a.length);
+config._sortedRootDir = config.root.sort((a, b) => b.length - a.length);
 
 app.all("/", (req, res, next) => {
   Promise.all(config.root.map((path) => readdir(path, config.ignore)))
@@ -20,7 +20,7 @@ app.all("/", (req, res, next) => {
       if (config.relativeDir)
         data = data.map((item) =>
           item.replace(
-            config._sortedDir.find((i) => item.indexOf(i) > -1),
+            config._sortedRootDir.find((i) => item.indexOf(i) > -1),
             ""
           )
         );
