@@ -24,7 +24,8 @@ app.all("/", (req, res, next) => {
             ""
           )
         );
-      for (let i of config.filter) data = data.filter((item) => new RegExp(i).test(item));
+
+      data = data.filter((item) => config.filter.some((i) => new RegExp(i).test(item)));
       if (config.sort) data = data.sort();
       res.send(data);
     })
